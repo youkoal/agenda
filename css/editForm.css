@@ -1,4 +1,7 @@
 form{
+	margin-top:10px;
+	padding-top: 10px;
+	padding-bottom: -10px;
 	float:left;
 	width:530px;
 	height:200px;

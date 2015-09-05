@@ -10,7 +10,8 @@
         <label class="lb1">tel   :&nbsp; </label> <label class="lb2"><?= htmlspecialchars($perso->tel1()) ?></label><br />
         <label class="lb1">tel2  :&nbsp; </label> <label class="lb2"><?= htmlspecialchars($perso->tel2()) ?></label><br />
       </p>
-
-    <p><a  href="?editer=1"><button id="modifButt">modifier info</button></a></p>
+      <form action="" method="post">
+    <p><input class='modifButt' type="submit" value="editer" name="editer" /></p>
+    </form>
     </fieldset>
     

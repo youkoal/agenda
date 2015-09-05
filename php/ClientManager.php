@@ -81,7 +81,7 @@ public function setDb(PDO $db)
     else
     {
     // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Client.
-      $q = $this->_db->query('SELECT id,pseudo,mail FROM clients WHERE pseudo = \''.$info.'\'');
+      $q = $this->_db->query('SELECT * FROM clients WHERE pseudo = \''.$info.'\'');
       $donnees = $q->fetch(PDO::FETCH_ASSOC);
       $c = new Client();
       $c->hydrate($donnees);
@@ -118,7 +118,7 @@ public function setDb(PDO $db)
     $q->bindValue(':mail', 	$perso->mail(), 	PDO::PARAM_STR);
     $q->bindValue(':tel1', 	$perso->tel1(), 	PDO::PARAM_STR);
     $q->bindValue(':tel2', 	$perso->tel2(), 	PDO::PARAM_STR);
-
+    $q->execute();
   }
 
 

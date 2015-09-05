@@ -23,7 +23,7 @@ session_start(); // On appelle session_start() APRÈS avoir enregistré l'autolo
 if (isset($_GET['deconnexion']))
 {
   session_destroy();
-  header('Location: .');
+  header('Location: acc.php');
   exit();
 }
 
@@ -37,7 +37,6 @@ if (isset($_SESSION['perso'])) // Si la session perso existe, on restaure l'obje
 {
 
   $perso = $_SESSION['perso'];
-  echo $perso->pseudo();
 }
 
 
@@ -78,7 +77,7 @@ elseif (isset($_POST['utiliser']) && isset($_POST['nom'])) // Si on a voulu util
 
 
 
-if (isset($perso) && isset($_GET['editer']))
+if (isset($perso) && isset($_POST['editer']))
 {
    echo ('<div id="persos">');
   //affiche info de l'utilisateur courant
@@ -88,6 +87,13 @@ if (isset($perso) && isset($_GET['editer']))
 
   $RService->renderListU($persos); 
   echo ('</div>');
+}
+elseif(isset($perso) && isset($_POST['editerOK']))
+{//mise à jour du perso
+  $perso->hydrate(['pseudo' => $_POST['nom'],'pass' => $_POST['pass'],'mail' =>$_POST['mail'],'tel1' => $_POST['tel1'],'tel2' => $_POST['tel2']]);
+  $manager->update($perso);
+  $_SESSION['perso']=$perso;
+
 }
 elseif (isset($perso)) // Si on utilise un personnage (nouveau ou pas).
 {
