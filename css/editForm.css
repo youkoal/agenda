@@ -1,0 +1,19 @@
+form{
+	float:left;
+	width:530px;
+	height:200px;
+	background-color: lightgray;
+	border-radius: 2px;
+}
+
+.fld{
+  display: inline-block;
+  float: left;
+  width:400px;
+}
+
+.btn{
+	width:530px;
+}
+
+

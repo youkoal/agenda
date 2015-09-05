@@ -16,6 +16,11 @@ class RenderService
 		include '/html/listePerso.php';
 	}
 
+	public function renderModif($perso)
+	{
+		include '/html/editForm.php';
+	}
+
 
 
 }//fin class

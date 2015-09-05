@@ -1,0 +1,33 @@
+body{
+	background-color: gray;
+	align-items:center;
+}
+
+form{
+	width:400px;
+	height:400px;
+	margin:auto;
+	padding-top: 100px;
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: right;
+    width:80px;
+
+}
+
+.fld{
+  display: inline-block;
+  float: left;
+  width:290px;
+}
+
+.btn{
+	margin-top:10px;
+	width:400px;
+}
+
+

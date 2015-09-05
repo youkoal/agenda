@@ -9,6 +9,17 @@ spl_autoload_register('chargerClasse');
 
 session_start(); // On appelle session_start() APRÈS avoir enregistré l'autoload.
 
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TP : agenda</title>
+    
+    <meta charset="utf-8" />
+  </head>
+  <body>
+
+<?php
 if (isset($_GET['deconnexion']))
 {
   session_destroy();
@@ -24,8 +35,11 @@ $RService = new RenderService();
 
 if (isset($_SESSION['perso'])) // Si la session perso existe, on restaure l'objet.
 {
+
   $perso = $_SESSION['perso'];
+  echo $perso->pseudo();
 }
+
 
 if (isset($_POST['creer']) && isset($_POST['nom'])) // Si on a voulu créer un Client.
 {
@@ -49,10 +63,11 @@ if (isset($_POST['creer']) && isset($_POST['nom'])) // Si on a voulu créer un C
 }
 
 elseif (isset($_POST['utiliser']) && isset($_POST['nom'])) // Si on a voulu utiliser un Client.
-{
+{//ne pas oublier d'ajouter la verif de password...
   if ($manager->exists($_POST['nom'])) // Si celui-ci existe.
   {
     $perso = $manager->get($_POST['nom']);
+    $_SESSION['perso']=$perso;
   }
   else
   {
@@ -60,29 +75,30 @@ elseif (isset($_POST['utiliser']) && isset($_POST['nom'])) // Si on a voulu util
   }
 }
 
-?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>TP : agenda</title>
-    
-    <meta charset="utf-8" />
-  </head>
-  <body>
 
 
 
-
-<?php
-if (isset($perso)) // Si on utilise un personnage (nouveau ou pas).
+if (isset($perso) && isset($_GET['editer']))
 {
+   echo ('<div id="persos">');
+  //affiche info de l'utilisateur courant
+  $RService->renderModif($perso); 
 
+  $persos = $manager->getList($perso->pseudo());
+
+  $RService->renderListU($persos); 
+  echo ('</div>');
+}
+elseif (isset($perso)) // Si on utilise un personnage (nouveau ou pas).
+{
+  echo ('<div id="persos">');
   //affiche info de l'utilisateur courant
   $RService->renderClient($perso); 
 
   $persos = $manager->getList($perso->pseudo());
 
   $RService->renderListU($persos); 
+  echo ('</div>');
 
 }
 else

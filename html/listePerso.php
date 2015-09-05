@@ -1,15 +1,24 @@
-<?php
-if (empty($persos))
-{
-  echo 'Personne';
-}
+<fieldset id="info_other">
+  <legend>Qui est enregistré ?</legend>
+  <p>
 
-else
-{
-  foreach ($persos as $unPerso)
-  {
-    echo htmlspecialchars($unPerso->pseudo()).'<br />';
-  }
-}
+<?php
+
+	if (empty($persos))
+	{
+	  echo 'Personne';
+	}
+
+	else
+	{
+	  foreach ($persos as $unPerso)
+	  {
+	  	$ps = htmlspecialchars($unPerso->pseudo());
+	    echo '<span title='.$ps.'>'.$ps.'</span><br />';
+	  }
+	}
 
 ?>
+
+	</p>
+</fieldset>
