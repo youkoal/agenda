@@ -20,6 +20,7 @@ session_start(); // On appelle session_start() APRÈS avoir enregistré l'autolo
   <body>
 
 <?php
+//si on veut se deco, pas la peine de continuer
 if (isset($_GET['deconnexion']))
 {
   session_destroy();
@@ -30,89 +31,52 @@ if (isset($_GET['deconnexion']))
 $db = new PDO('mysql:host=localhost;dbname=agenda', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
 
-$manager = new ClientManager($db);
+$manager  = new ClientManager($db);
+$tmanager = new TacheManager($db);
 $RService = new RenderService();
+$UService = new utilService($db);
 
-if (isset($_SESSION['perso'])) // Si la session perso existe, on restaure l'objet.
+
+// Si la session perso existe, on restaure l'objet.
+if (isset($_SESSION['perso'])) 
 {
-
   $perso = $_SESSION['perso'];
 }
 
 
+//creation\utilisation d'un utilisateur
 if (isset($_POST['creer']) && isset($_POST['nom'])) // Si on a voulu créer un Client.
 {
-  $perso = new Client(); // On crée un nouveau Client.
-  $perso->hydrate(['pseudo' => $_POST['nom'],'pass' => $_POST['pass']]);
-  
-  if ($manager->exists($_POST['nom']))
-  {
-    $message = 'Le nom choisi est invalide.';
-    unset($perso);
-  }
-  elseif ($manager->exists($perso->pseudo()))
-  {
-    $message = 'Le nom du Client est déjà pris.';
-    unset($perso);
-  }
-  else
-  {
-    $manager->add($perso);
-  }
+  $UService->creeNewClient($manager);
 }
-
 elseif (isset($_POST['utiliser']) && isset($_POST['nom'])) // Si on a voulu utiliser un Client.
 {//ne pas oublier d'ajouter la verif de password...
-  if ($manager->exists($_POST['nom'])) // Si celui-ci existe.
-  {
-    $perso = $manager->get($_POST['nom']);
-    $_SESSION['perso']=$perso;
-  }
-  else
-  {
-    $message = 'Ce Client n\'existe pas !'; // S'il n'existe pas, on affichera ce message.
-  }
+  $UService->connectUser($RService,$manager,$_POST['nom'],$tmanager);
 }
 
 
 
-
+//utilisateur connecté
 if (isset($perso) && isset($_POST['editer']))
 {
-   echo ('<div id="persos">');
-  //affiche info de l'utilisateur courant
-  $RService->renderModif($perso); 
-
-  $persos = $manager->getList($perso->pseudo());
-
-  $RService->renderListU($persos); 
-  echo ('</div>');
+  $UService->editRender($RService,$manager,$perso);
 }
 elseif(isset($perso) && isset($_POST['editerOK']))
 {//mise à jour du perso
-  $perso->hydrate(['pseudo' => $_POST['nom'],'pass' => $_POST['pass'],'mail' =>$_POST['mail'],'tel1' => $_POST['tel1'],'tel2' => $_POST['tel2']]);
-  $manager->update($perso);
-  $_SESSION['perso']=$perso;
-
+  $UService->editSending($perso,$manager);
 }
-elseif (isset($perso)) // Si on utilise un personnage (nouveau ou pas).
+elseif (isset($perso) && !(isset($_POST['utiliser']))) // Si on utilise un personnage (nouveau ou pas).
 {
-  echo ('<div id="persos">');
-  //affiche info de l'utilisateur courant
-  $RService->renderClient($perso); 
-
-  $persos = $manager->getList($perso->pseudo());
-
-  $RService->renderListU($persos); 
-  echo ('</div>');
-
+  $UService->userRender($RService,$manager,$perso);
 }
-else
+
+
+//formulaire de connection si l'utilisateur n'est pas connecter
+if(!(isset($_SESSION['perso'])))
 {
   //formulaire de connection
   $RService->renderForn(); 
 }
-
 ?>
 
 </body>

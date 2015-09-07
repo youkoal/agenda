@@ -21,6 +21,11 @@ class RenderService
 		include '/html/editForm.php';
 	}
 
+	public function renderTaches($taches)
+	{
+		include '/html/listTaches.php';
+	}
+
 
 
 }//fin class

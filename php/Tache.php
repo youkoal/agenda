@@ -3,8 +3,8 @@ class Tache
 {
 	private $_id;
 	private $_clientId;
-	private $_dateDebut;
-	private $_dateFin;
+  private $_dateEntree;
+	private $_dateE;
 	private $_titre;
 	private $_texte;
 
@@ -26,12 +26,12 @@ class Tache
 	}
 
 	//getters
-  	public function id() 		{ return $this->_id; 		}
-  	public function clientId() 	{ return $this->_clientId; 	}
-  	public function dateDebut() { return $this->_dateDebut; }
-  	public function dateFin() 	{ return $this->_dateFin; 	}
-  	public function titre() 	{ return $this->_titre; 	}
-  	public function texte() 	{ return $this->_texte; 	}
+  	public function id() 		    { return $this->_id; 		    }
+  	public function clientId() 	{ return $this->_clientId;  }
+    public function dateEntree(){ return $this->_dateEntree;}
+  	public function dateE()     { return $this->_dateE;     }
+  	public function titre() 	  { return $this->_titre; 	  }
+  	public function texte() 	  { return $this->_texte; 	  }
 
 
   	//setters
@@ -47,24 +47,25 @@ class Tache
     	// L'identifiant du personnage sera, quoi qu'il arrive, un nombre entier.
     	$this->_clientId = (int) $id;
   	}
+
+
+    public function setDateEntree($date)
+    {
+      if (is_string($date) && strlen($date) <= 11)
+      {
+        //on stocke la date comme étant une chaine de charactere
+          $this->_dateEntree = $date;
+      }
+    }
       
 
-  	public function setDateDebut($date)
+  	public function setDateE($date)
   	{
-  		if (validateDate($date))
-		{
-			//on stocke la date comme étant une chaine de charactere
-    		$this->_dateDebut = (str) $date;
-    	}
-  	}
-
-  	public function setDateFin($date)
-  	{
-  		if (validateDate($date))
-		{
-			//on stocke la date comme étant une chaine de charactere
-    		$this->_dateFin = (str) $date;
-    	}
+  		if (is_string($date) && strlen($date) <= 11)
+  		{
+  			//on stocke la date comme étant une chaine de charactere
+      		$this->_dateE = $date;
+      }
   	}
 
 
@@ -72,7 +73,7 @@ class Tache
   	{
   		if (is_string($titre) && strlen($titre) <= 120)
 		{
-    		$this->_titre = (str) $titre;
+    		$this->_titre = $titre;
     	}
   	}
 
@@ -80,11 +81,13 @@ class Tache
   	public function setTexte($texte)
   	{
   		if (is_string($texte) && strlen($texte) <= 1200)
-		{
-    		$this->_texte = (str) $texte;
+		  {
+    		$this->_texte = $texte;
     	}
   	}
 
 
 }//end class
+
+
 ?>
