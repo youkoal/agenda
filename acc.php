@@ -34,7 +34,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une aler
 $manager  = new ClientManager($db);
 $tmanager = new TacheManager($db);
 $RService = new RenderService();
-$UService = new utilService($db);
+$UService = new utilService($tmanager);
 
 
 // Si la session perso existe, on restaure l'objet.

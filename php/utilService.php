@@ -3,15 +3,6 @@ require_once('/TacheManager.php');
 class utilService
 {
 
-	private $_db; // Instance de PDO
-	private $_tmanager;
-  	public function __construct($db)
-  	{
-    	$this->tmanager=new TacheManager($db);
-  	}
-
-	
-  	public function tmanager(){return $_tmanager;}
 	//creation d'un nouvel utilisateur
 	public function creeNewClient($manager)
 	{
@@ -38,7 +29,7 @@ class utilService
 		    $perso = $manager->get($nom);
 		    $_SESSION['perso']=$perso;
 		    $this->userRender($RService,$manager,$perso);
-		    $this->Taches($RService,$perso);
+		    $this->Taches($RService,$perso,$tmanager);
 		}
 		else
 		{
@@ -72,9 +63,9 @@ class utilService
     	header('Location: acc.php');
 	}
 
-	public function Taches($RService,$perso)
+	public function Taches($RService,$perso,$tmanager)
 	{
-		$taches=$this->tmanager()->getAll($perso->id());
+		$taches=$tmanager->getAll($perso->id());
 		$RService->renderTaches($taches);
 	}
 
