@@ -3,36 +3,126 @@
 	<head>
 		<title>TP : agenda</title> 
 		<meta charset="utf-8" />
-
+		<link rel="stylesheet" type="text/css" href="css/perso.css">
 	</head>
 
 	<body>
 
-		<link rel="stylesheet" type="text/css" href="css/perso.css">
+		
+		<div id="persos">
+			<p><a href="?deconnexion=1"><button>Déconnexion</button></a></p>
+		    
+		    
+		    <fieldset id="info_self">
+			<legend>Mes informations</legend>
+			<p>
+		        <label class="lb1">Nom   :&nbsp; </label> <label id="nomPerso" 	class="lb2"></label><br />
+		        <label class="lb1">mail  :&nbsp; </label> <label id="mailPerso" class="lb2"></label><br />
+		        <label class="lb1">tel   :&nbsp; </label> <label id="telPerso" 	class="lb2"></label><br />
+		        <label class="lb1">tel2  :&nbsp; </label> <label id="tel2Perso" class="lb2"></label><br />
+			</p>
+			<form action="" method="post">
+		    <p><input class='modifButt' type="submit" value="editer" name="editer" /></p>
+		    </form>
+		    </fieldset>
 
-		<p><a href="?deconnexion=1"><button>Déconnexion</button></a></p>
-	    
-	    <fieldset id="info_self">
-		<legend>Mes informations</legend>
-		<p>
-	        <label class="lb1">Nom   :&nbsp; </label> <label id="nomPerso" 	class="lb2"></label><br />
-	        <label class="lb1">mail  :&nbsp; </label> <label id="mailPerso" class="lb2"></label><br />
-	        <label class="lb1">tel   :&nbsp; </label> <label id="telPerso" 	class="lb2"></label><br />
-	        <label class="lb1">tel2  :&nbsp; </label> <label id="tel2Perso" class="lb2"></label><br />
-		</p>
-		<form action="" method="post">
-	    <p><input class='modifButt' type="submit" value="editer" name="editer" /></p>
-	    </form>
-	    </fieldset>
 
 
+			<fieldset id="info_other">
+			<legend>Qui est enregistré ?</legend>
+			  	<div id="members">
 
-		<fieldset id="info_other">
-		<legend>Qui est enregistré ?</legend>
-		  	<div id="members">
+			  	</div>
+			</fieldset>
+	</div>
 
-		  	</div>
-		</fieldset>
+
+	<div id="taches">
+
+		<div id="optionsTaches">
+			ici les options
+		</div>
+
+		<div id="bigTaches">
+			<div id="infoT">
+				<label class="lb1">date   	:&nbsp; </label> 
+					<label id="BTdade" 	class="lb2"></label><br />
+
+		        <label class="lb1">entré le :&nbsp; </label> 
+		        	<label id="BTEdate" class="lb2"></label><br />
+
+		        <label class="lb1">titre   	:&nbsp; </label> 
+		        	<label id="BTtitre" 	class="lb2"></label><br />
+			</div>
+
+			<div class="maxi">
+				<p id='txtTache'>
+Div positioning - putting one after another - Stack Overflow
+stackoverflow.com/.../div-positioning-putting-one-aft...
+Traduire cette page
+8 sept. 2013 - Div positioning - putting one after another ... When the user taps on the number pad, I will place that number in the "problemanswer" segment.
+Position a Div to appear below another DIV - Stack Overflow
+stackoverflow.com/.../position-a-div-to-appear-below...
+Traduire cette page
+15 déc. 2009 - Just a guess, but have you tried adding the style clear: both to the second div? I doubt it will help, but it might. You can also try adding a top ...
+html - How to place a div below another div? - Stack Overflow
+stackoverflow.com/.../how-to-place-a-div-below-anot...
+Traduire cette page
+12 oct. 2013 - what about changing the position: relative on your #content #text div to position: absolute #content #text { position:absolute; width:950px; ...
+html - Put one div after another - Stack Overflow
+stackoverflow.com/.../put-one-div-after-another
+Traduire cette page
+20 août 2014 - Put one div after another .... I think this is what you're after: http://jsfiddle.net/ht8k40tr/ ... Another solution is to set #topbar position to relative :
+How to force 2 DIVs one after another to start on new lines ...
+community.sitepoint.com/...divs...after-another.../252...
+Traduire cette page
+1 janv. 2013 - ''. And I want to place under these images another DIV, where the buttons are loacted. However, whatever I do the DIV that is to contain  ...
+Learn CSS Positioning in Ten Steps: position static relative ...
+www.barelyfitz.com/screencast/html.../positioning/
+Traduire cette page
+... to override a positioning that had been previously set. #div-1 { position:static; } .... id = div-1c. id = div-after. Home : Contact Us : ©2006 BarelyFitz Designs,  ...
+How to position one div below the other without setting absolute ...
+forums.asp.net/.../1760136.aspx?...position...div+belo...
+Traduire cette page
+20 janv. 2012 - 12 messages - ‎8 auteurs
+I have set absolute positions for both DIVs but I tried relative position for t... ... of each div, the larger value of z-index will place it over another.
+How to position a div below an absolute positioned div? - CSS ...
+https://www.webmasterworld.com/css/3373826.htm - Traduire cette page
+20 juin 2007 - I have a div, "mainContent", that is absolutely positioned. I'd like to position another div, "footer", directly below it. The height of the first div is  ...
+How can I position a  below another div? - CSS forum at ...
+12 oct. 2013 - what about changing the position: relative on your #content #text div to position: absolute #content #text { position:absolute; width:950px; ...
+html - Put one div after another - Stack Overflow
+stackoverflow.com/.../put-one-div-after-another
+Traduire cette page
+20 août 2014 - Put one div after another .... I think this is what you're after: http://jsfiddle.net/ht8k40tr/ ... Another solution is to set #topbar position to relative :
+How to force 2 DIVs one after another to start on new lines ...
+community.sitepoint.com/...divs...after-another.../252...
+Traduire cette page
+1 janv. 2013 - ''. And I want to place under these images another DIV, where the buttons are loacted. However, whatever I do the DIV that is to contain  ...
+Learn CSS Positioning in Ten Steps: position static relative ...
+www.barelyfitz.com/screencast/html.../positioning/
+Traduire cette page
+... to override a positioning that had been previously set. #div-1 { position:static; } .... id = div-1c. id = div-after. Home : Contact Us : ©2006 BarelyFitz Designs,  ...
+How to position one div below the other without setting absolute ...
+forums.asp.net/.../1760136.aspx?...position...div+belo...
+Traduire cette page
+20 janv. 2012 - 12 messages - ‎8 auteurs
+I have set absolute positions for both DIVs but I tried relative position for t... ... of each div, the larger value of z-index will place it over another.
+How to position a div below an absolute positioned div? - CSS ...
+https://www.webmasterworld.com/css/3373826.htm - Traduire cette page
+20 juin 2007 - I have a div, "mainContent", that is absolutely positioned. I'd like to position another div, "footer", directly below it. The height of the first div is  ...
+How can I position a  below another div? - CSS forum at ...
+
+
+					<p>
+
+			</div>
+		</div>
+
+		<div id="minTaches">
+		</div>
+
+	</div>
 
 
 

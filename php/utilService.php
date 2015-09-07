@@ -117,5 +117,38 @@
 	}
 
 
+	function makeResponseMinTaches($perso,$tmanager)
+	{
+		$p =$tmanager->getAll($perso->id());
+		$p2=[];
+
+		foreach ($p as $tch)
+		  {
+		  	$x = array(
+		  		"id" 	=>$tch->id(),
+		  		"dateE" =>$tch->dateE(),
+		  		"titre"	=>$tch->titre()
+		  		);
+		  	$p2[] = $x;
+		  }
+		echo json_encode($p2);
+	}
+
+
+	function makeResponseBigTaches($perso,$tmanager,$tid)
+	{
+		$tch=$tmanager->get($tid,$perso->id());
+	  	$x = array(
+	  		"id" 			=>$tch->id(),
+	  		"dateE" 		=>$tch->dateE(),
+	  		"dateEntree" 	=>$tch->dateEntree(),
+	  		"titre"			=>$tch->titre(),
+	  		"texte" 		=>$tch->texte()
+	  	);
+
+		echo json_encode($x);
+	}
+
+
 
 ?>

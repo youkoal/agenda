@@ -49,11 +49,14 @@ class TacheManager
 	}
 
 
-	public function get($id)
+	public function get($id,$idc)
   	{
     	//on veut récupérer la tache avec son identifiant.
 	    // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Client.
-	    $q = $this->_db->query('SELECT * FROM taches WHERE id = '.$id);
+	    $q = $this->_db->prepare('SELECT * FROM taches WHERE id = :id AND clientId = :idc');
+	    $q->bindValue(':id'  ,$id,  PDO::PARAM_INT);
+	    $q->bindValue(':idc' ,$idc, PDO::PARAM_INT);
+	    $q->execute();
 	    $donnees = $q->fetch(PDO::FETCH_ASSOC);
 	    $t=new Tache();
 	   	$t->hydrate($donnees);

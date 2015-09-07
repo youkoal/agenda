@@ -69,5 +69,11 @@ if(isset($_GET['get_param'])){
   elseif($_GET['get_param']=='editPerso'){
     makeResponseEdit($perso);
   }
+  elseif($_GET['get_param']=='minTaches'){
+    makeResponseMinTaches($perso,$tmanager);
+  }
+  elseif($_GET['get_param']=='bigTaches'){
+    makeResponseBigTaches($perso,$tmanager,$_GET['idTask']);
+  }
 }
 ?>

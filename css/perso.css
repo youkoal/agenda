@@ -1,9 +1,12 @@
 body{
 	background-color: gray;
+	width:800px;
+
+	
 
 }
 
-#persos{
+#persos{	
 	width:800px;
 	margin:auto;
 
@@ -15,7 +18,7 @@ legend{
 #info_self{
 	float:left;
 	width:530px;
-	height:200px;
+	height:150px;
 	background-color: lightgray;
 	border-radius: 2px;
 }
@@ -23,7 +26,7 @@ legend{
 #info_other{
 	float:left;
 	width:200px;
-	height:200px;
+	height:150px;
 	overflow-y:auto; 
 	background-color: lightblue;
 }
@@ -50,5 +53,69 @@ legend{
 #modifButt{
 	border-radius: 3px;
 	float:right;
-	margin-top:50px;
+	/*margin-top:50px;*/
 }
+
+
+/* ------ taches ------ */
+#taches{
+	width:800px;
+	padding-top: 10px;
+	margin:auto;
+}
+
+#optionsTaches{
+	display: inline-block;
+
+	width:775px;
+	height:80px;
+	padding:10px;
+	border-radius: 15px;
+	margin:auto;
+	background-color: brown;
+}
+
+#minTaches{
+	float:left;
+	width:300px;
+	height: 600px;
+	overflow-y:scroll;
+	background-color: lightgray;
+}
+
+#bigTaches{
+	float:left;
+	width:495px;
+	height: 600px;
+	overflow:hidden;
+	background-color: lightgray;
+}
+
+#infoT{
+	float:left;
+	width:475px;
+	height: 80px;
+	padding:10px;
+	margin:auto;
+}
+
+.mini{
+	width:280;
+	height:35px;
+	margin:auto;
+	margin-top:10px;
+	background-color: white;
+	border-radius: 10px;
+	padding:5px;
+
+}
+
+.maxi{
+	float:left;
+	width:475px;
+	height: 480px;
+	padding:10px;
+	margin:auto;
+	overflow-y:scroll;
+}
+
