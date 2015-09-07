@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TP : agenda</title> 
+		<meta charset="utf-8" />
+
+	</head>
+
+	<body>
+
+		<link rel="stylesheet" type="text/css" href="css/perso.css">
+
+		<p><a href="?deconnexion=1"><button>Déconnexion</button></a></p>
+	    
+	    <fieldset id="info_self">
+		<legend>Mes informations</legend>
+		<p>
+	        <label class="lb1">Nom   :&nbsp; </label> <label id="nomPerso" 	class="lb2"></label><br />
+	        <label class="lb1">mail  :&nbsp; </label> <label id="mailPerso" class="lb2"></label><br />
+	        <label class="lb1">tel   :&nbsp; </label> <label id="telPerso" 	class="lb2"></label><br />
+	        <label class="lb1">tel2  :&nbsp; </label> <label id="tel2Perso" class="lb2"></label><br />
+		</p>
+		<form action="" method="post">
+	    <p><input class='modifButt' type="submit" value="editer" name="editer" /></p>
+	    </form>
+	    </fieldset>
+
+
+
+		<fieldset id="info_other">
+		<legend>Qui est enregistré ?</legend>
+		  	<div id="members">
+
+		  	</div>
+		</fieldset>
+
+
+
+
+
+
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="JS/connected.js"></script>
+</html>

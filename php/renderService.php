@@ -16,14 +16,19 @@ class RenderService
 		include '/html/listePerso.php';
 	}
 
-	public function renderModif($perso)
+	public function renderModif()
 	{
-		include '/html/editForm.php';
+		include '/html/editPerso.html';
 	}
 
 	public function renderTaches($taches)
 	{
 		include '/html/listTaches.php';
+	}
+
+	public function renderAcc()
+	{
+		include '/html/connected.html';
 	}
 
 

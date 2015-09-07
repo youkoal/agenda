@@ -1,9 +1,13 @@
 <?php
-class utilService
-{
+
+	$db = new PDO('mysql:host=localhost;dbname=agenda', 'root', '');
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // On émet une alerte à chaque fois qu'une requête a échoué.
+	$manager  = new ClientManager($db);
+	$tmanager = new TacheManager($db);
+	$RService = new RenderService();
 
 	//creation d'un nouvel utilisateur
-	public function creeNewClient($manager)
+	function creeNewClient($manager)
 	{
 	    $perso = new Client(); // On crée un nouveau Client.
   		$perso->hydrate(['pseudo' => $_POST['nom'],'pass' => $_POST['pass']]);
@@ -21,14 +25,15 @@ class utilService
 	}
 
 
-	public function connectUser($RService,$manager,$nom,$tmanager)
+	function connectUser($RService,$manager,$nom,$tmanager)
 	{
 		if ($manager->exists($nom)) // Si celui-ci existe.
 		{
 		    $perso = $manager->get($nom);
 		    $_SESSION['perso']=$perso;
-		    $this->userRender($RService,$manager,$perso);
-		    $this->Taches($RService,$perso,$tmanager);
+		    //userRender($RService,$manager,$perso);
+		    //Taches($RService,$perso,$tmanager);
+		    $RService->renderAcc();
 		}
 		else
 		{
@@ -36,25 +41,22 @@ class utilService
 		}	
 	}
 
-	public function userRender($RService,$manager,$perso)
+	function userRender($RService)
 	{
-		echo ('<div id="persos">');
-			//affiche info de l'utilisateur courant
-			$RService->renderClient($perso); 
-			$RService->renderListU($manager->getList($perso->pseudo())); 
-		echo ('</div>');
+		$RService->renderAcc();
 	}
 
-	public function editRender($RService,$manager,$perso)
+	function editRender($RService)
 	{
-		echo ('<div id="persos">');
+		//echo ('<div id="persos">');
   		//affiche info de l'utilisateur courant
-  		$RService->renderModif($perso); 
-  		$RService->renderListU($manager->getList($perso->pseudo())); 
-  		echo ('</div>');
+  		//$RService->renderModif($perso); 
+  		//$RService->renderListU($manager->getList($perso->pseudo())); 
+  		//echo ('</div>');
+  		$RService->renderModif();
 	}
 
-	public function editSending($perso,$manager)
+	function editSending($perso,$manager)
 	{
 		$perso->hydrate(['pseudo' => $_POST['nom'],'pass' => $_POST['pass'],'mail' =>$_POST['mail'],'tel1' => $_POST['tel1'],'tel2' => $_POST['tel2']]);
     	$manager->update($perso);
@@ -62,13 +64,58 @@ class utilService
     	header('Location: acc.php');
 	}
 
-	public function Taches($RService,$perso,$tmanager)
+	function Taches($RService,$perso,$tmanager)
 	{
 		$taches=$tmanager->getAll($perso->id());
 		$RService->renderTaches($taches);
 	}
 
 
-}//fin class
+
+
+
+
+	//tout les utilisateurs + utilisateur courant
+	function makeResponseUsers($perso, $manager)
+	{
+		//info perso courant
+		$p =[
+				"nomPerso" =>$perso->pseudo(),
+				"mailPerso"=>$perso->mail(),
+				"telPerso" =>$perso->tel1(),
+				"tel2Perso"=>$perso->tel2()
+			];
+
+		//les perso existants
+		$all = $manager->getList($perso->pseudo());
+		$p2=[];
+
+		if (empty($all))
+		{
+			$p2=['personne'];
+		}
+		else
+		{
+		  foreach ($all as $unPerso)
+		  {
+		  	$p2[] = $unPerso->pseudo();
+		  }
+		}
+		echo json_encode(array($p,$p2));
+
+	}
+
+	function makeResponseEdit($perso)
+	{
+		$p =[
+				"nomPerso" =>$perso->pseudo(),
+				"mailPerso"=>$perso->mail(),
+				"telPerso" =>$perso->tel1(),
+				"tel2Perso"=>$perso->tel2()
+			];
+		echo json_encode($p);
+	}
+
+
 
 ?>
