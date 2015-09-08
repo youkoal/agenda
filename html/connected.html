@@ -4,6 +4,7 @@
 		<title>TP : agenda</title> 
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="css/perso.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	</head>
 
 	<body>
@@ -40,7 +41,18 @@
 	<div id="taches">
 
 		<div id="optionsTaches">
-			ici les options
+
+			<fieldset id="optForm">
+			<legend id="optleg">interval</legend>
+				<label class='optLab'>à partir du : </label>
+					<input id='dtPick1' class='fld' type="text" name="nom"  /><br>
+				<label class='optLab'>jusqu'au   : </label>
+					<input id='dtPick2'  class='fld' type="text" name="pass" />
+
+			</fieldset>
+
+
+
 		</div>
 
 		<div id="bigTaches">
@@ -131,5 +143,6 @@ How can I position a  below another div? - CSS forum at ...
 
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="JS/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 	<script src="JS/connected.js"></script>
 </html>

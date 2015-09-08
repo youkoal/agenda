@@ -13,9 +13,6 @@ function initData(){
         data: { 'get_param' : 'users' }, 
         dataType: 'json',
         success: function(data) { 
-        	console.log(data);
-        	console.log(data[0]);
-        	console.log(data[1]);
         	dataTab=data;
             initPerso(data[0]);
             initOther(data[1]);
@@ -68,7 +65,6 @@ function buildMin(d){
         tache.appendChild(document.createTextNode(d[i]['titre']));
         
         tache.onclick = function(){
-            console.log(this.value);
             getBig(this.value);
         };
         theDiv.appendChild(tache);
@@ -83,7 +79,6 @@ function getBig(id){
         data: { 'get_param' : 'bigTaches' , 'idTask' : id}, 
         dataType: 'json',
         success: function(data) { 
-            console.log(data);
             buildBig(data);
         }
     });
@@ -100,4 +95,28 @@ function buildBig(d){
 
     }
 
+//option datepicker
 
+$.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
+    closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
+    prevText: '<Préc', prevStatus: 'Voir le mois précédent',
+    nextText: 'Suiv>', nextStatus: 'Voir le mois suivant',
+    currentText: 'Courant', currentStatus: 'Voir le mois courant',
+    monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
+    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+    monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
+    'Jul','Aoû','Sep','Oct','Nov','Déc'],
+    monthStatus: 'Voir un autre mois', yearStatus: 'Voir une autre année',
+    weekHeader: 'Sem', weekStatus: '',
+    dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+    dayNamesMin: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+    
+    dayStatus: 'Utiliser DD comme premier jour de la semaine', dateStatus: 'Choisir le DD, MM d',
+    dateFormat: 'dd/mm/yy', firstDay: 0, 
+    initStatus: 'Choisir la date', isRTL: false};
+ $.datepicker.setDefaults($.datepicker.regional['fr']);
+
+$(function() {
+    $( "#dtPick1" ).datepicker();
+    $( "#dtPick2" ).datepicker();
+});

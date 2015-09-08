@@ -119,3 +119,33 @@ legend{
 	overflow-y:scroll;
 }
 
+.fld{
+	display: inline-block;
+	float: left;
+	width:80px;
+}
+
+.optLab{
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: right;
+    width:80px;
+}
+
+
+#optForm{
+	padding-top: 5px;
+	float:left;
+	width:170px;
+	height:60px;
+	background-color: lightgray;
+	border-radius: 10px;
+
+}
+
+#optleg{
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 5px;
+}
