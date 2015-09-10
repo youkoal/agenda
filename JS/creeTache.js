@@ -26,3 +26,4 @@ $.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
 $(function() {
     $( "#date" ).datepicker();
 });
+

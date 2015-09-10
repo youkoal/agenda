@@ -49,14 +49,15 @@ elseif(isset($perso) && isset($_POST['editerOK']))
 {//mise à jour du perso
   editSending($perso,$manager);
 }
-elseif (isset($perso) && !(isset($_GET['get_param']))) // Si on utilise un personnage (nouveau ou pas).
-{
-  userRender($RService,$manager,$perso);
-}
 elseif (isset($perso) && isset($_POST['creeTache'])) // Si on utilise un personnage (nouveau ou pas).
 {
   tacheForm($RService);
 }
+elseif (isset($perso) && !(isset($_GET['get_param']))) // Si on utilise un personnage (nouveau ou pas).
+{
+  userRender($RService,$manager,$perso);
+}
+
 
 
 //formulaire de connection si l'utilisateur n'est pas connecter
