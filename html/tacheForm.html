@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TP : agenda</title> 
+		<meta charset="utf-8" />
+
+	</head>
+	<body>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="css/tacheForm.css">
+
+<fieldset>
+			<legend>
+				<a href="?deconnexion=1"><button id='deco'>Déconnexion</button></a>
+			</legend>
+<form action="" method="post">
+
+	<label class='lb1'>date : </label>
+		<input id='date' class='fld' type="text" name="date"  />
+		<br>
+	<label class='lb1'>titre   : </label>
+		<input id='titre' class='fld' type="text" name="titre" />
+		<br>
+	<label class='lb1'>texte   : </label>
+		<input id='texte' class='fld' type="text" name="texte" />
+		<br><br>
+
+	<p>
+	<input id='valider' type="submit" value="cree la tache" name="editerOK" />
+	<input id='annuler' type="submit" value="annuler" name="ok" />
+	</p>
+</form>
+
+</fieldset>
+
+
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="JS/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+	<script src="JS/creeTache.js"></script>
+</html>

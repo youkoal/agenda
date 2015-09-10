@@ -90,10 +90,8 @@ function buildBig(d){
     document.getElementById("BTEdate").innerHTML  = d['dateEntree'];
     document.getElementById("BTtitre").innerHTML  = d['titre'];
     document.getElementById("txtTache").innerHTML = d['texte'];
-
-
-
     }
+
 
 //option datepicker
 
@@ -120,3 +118,9 @@ $(function() {
     $( "#dtPick1" ).datepicker();
     $( "#dtPick2" ).datepicker();
 });
+
+
+
+
+
+

@@ -58,6 +58,8 @@ legend{
 
 
 /* ------ taches ------ */
+
+
 #taches{
 	width:800px;
 	padding-top: 10px;
@@ -144,8 +146,19 @@ legend{
 
 }
 
+#actionButtons{
+	display: inline-block;
+	padding-top: 5px;
+	float:left;
+	width:360px;
+	height:60px;
+	background-color: lightgray;
+	border-radius: 10px;
+}
+
 #optleg{
 	padding-left: 5px;
 	padding-right: 5px;
 	border-radius: 5px;
 }
+

@@ -1,0 +1,77 @@
+body{
+	background-color: gray;
+}
+fieldset{
+	margin:auto;
+	width:680px;
+	height:460px;
+	background-color: #59b8eb;
+	border-radius: 20px;
+}
+form{
+	width:680px;
+	height:400px;
+	margin:auto;
+	padding-top: 20px;
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: right;
+    width:60px;
+    font-weight: bold ;
+}
+
+.fld{
+  display: inline-block;
+  float: left;
+  width:600px;
+}
+
+.btn{
+	margin-top:10px;
+	width:400px;
+}
+
+#texte{
+	height:300px;
+}
+
+
+
+#valider {
+	cursor:pointer;
+	float:left;
+	background-color: #71cc43;
+	border-radius: 20px;
+	padding:4px;
+	font-weight: bold ;
+}
+
+#annuler {
+	cursor:pointer;
+	float:left;
+	background-color: #e32020;
+	border-radius: 20px;
+	padding:4px;
+	font-weight: bold ;
+}
+
+p{
+	float:right;
+	padding-top: 10px;
+	display: inline-block;
+	width:180px;
+}
+
+
+#deco {
+	cursor:pointer;
+	float:left;
+	background-color: #e32020;
+	border-radius: 20px;
+	padding:4px;
+	font-weight: bold ;
+}

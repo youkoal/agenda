@@ -53,6 +53,10 @@ elseif (isset($perso) && !(isset($_GET['get_param']))) // Si on utilise un perso
 {
   userRender($RService,$manager,$perso);
 }
+elseif (isset($perso) && isset($_POST['creeTache'])) // Si on utilise un personnage (nouveau ou pas).
+{
+  tacheForm($RService);
+}
 
 
 //formulaire de connection si l'utilisateur n'est pas connecter

@@ -70,6 +70,10 @@
 		$RService->renderTaches($taches);
 	}
 
+	function tacheForm($RService){
+		$RService->renderCreeTache();
+	}
+
 
 
 
