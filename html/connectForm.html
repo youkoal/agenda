@@ -6,8 +6,11 @@
 	</head>
 
 	<body>
+		
+		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="css/login.css">
-
+<!--
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 <form action="" method="post">
 	<label>pseudo : </label><input class='fld' type="text" name="nom" />
 	<label>pass : </label><input class='fld' type="text" name="pass" />
@@ -16,6 +19,27 @@
 	<input class='btn' type="submit" value="Utiliser cet utilisateur" name="utiliser" />
 	</p>
 </form>
+-->
 
+<div id="box">
+		
+		<div id="first-box">
+			<form id="form1" action="" method="post">
+
+					<p><input type="text" placeholder="pseudo" id="pseudo" name="nom" /></p>
+
+					<p><input type="password" placeholder="Mot de passe" id="password" name="pass" /></p>
+
+				<p id="boutons">
+					<input type="submit" value="utiliser" name="utiliser" />
+				</p>
+
+				<p id="boutons2">
+					<input type="submit" value="creer" name="creer" />
+				</p>
+			</form>
+			
+		</div>
+	</div>
 	</body>
 </html>
