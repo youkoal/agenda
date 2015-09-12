@@ -1,5 +1,6 @@
 var url='http://127.0.0.1/exos_php/exos/agenda/acc.php';
-
+var mois = ['Janvier','Février','Mars','Avril','Mai','Juin',
+    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 $(document).ready(function(){
     initData(); //donnee clients
     getMin();   //donnee taches min
@@ -60,7 +61,7 @@ function buildMin(d){
         tache.className = "mini";
         tache.value     =d[i]['id'];
 
-        tache.appendChild(document.createTextNode(d[i]['dateE']));
+        tache.appendChild(document.createTextNode(dateSwap(d[i]['dateE'])));
         tache.appendChild(document.createElement("br"));
         tache.appendChild(document.createTextNode(d[i]['titre']));
         
@@ -84,13 +85,24 @@ function getBig(id){
     });
 }
 
+
 function buildBig(d){
     document.getElementById("bigTaches").value    = d['id'];
-    document.getElementById("BTdade").innerHTML   = d['dateE'];
+    document.getElementById("BTdade").innerHTML   = dateSwap(d['dateE']);
     document.getElementById("BTEdate").innerHTML  = d['dateEntree'];
     document.getElementById("BTtitre").innerHTML  = d['titre'];
     document.getElementById("txtTache").innerHTML = d['texte'];
     }
+
+
+function dateSwap(d){
+    var y=d.substring(0,4);
+    var m=parseInt(d.substring(5,7));
+    var d=d.substring(8,10);
+
+    var comp= d+' '+mois[m-1]+' '+y;
+    return comp;
+}
 
 
 //option datepicker
@@ -124,7 +136,44 @@ $(function() {
 $("#newTask").click(function() 
     {
 
+        return;
+    });
 
-    }
 
+$("#delTask").click(function() 
+    {
+        var mess= "vous etes sur le point de supprimer la tache :\n";
+        mess += $("#BTtitre").text();
+        var answer = confirm (mess);
+        if (answer)
+        {
+            //alert ("suppression en cours.");
+            $.ajax({ 
+                type: 'POST', 
+                url: url, 
+                data: { 'delTask' :'ok', 'id' : document.getElementById("bigTaches").value}, 
+                dataType: 'text',
+                success: function(data) { 
+                    console.log(data);
+                    window.location.replace(url);//actualise la page
+                }
+            });
+            
+        }
+        else
+        alert ("opération annuler")
+    });
 
+$('#editTask').click(function() 
+    {
+        $.ajax({ 
+            type: 'POST', 
+            url: url, 
+            data: { 'editerTache' :'ok', 'id' : document.getElementById("bigTaches").value}, 
+            dataType: 'text',
+            success: function(data) { 
+                console.log(data);
+                window.location.replace(url+"?ed");
+            }
+        });
+    });

@@ -154,5 +154,69 @@
 	}
 
 
+	function setEditTask()
+	{
+		$_SESSION['tId']=$_POST['id'];;
+		
+	}
+
+
+	function makeResponseEditTaches($perso,$tmanager)
+	{
+		$tch=$tmanager->get($_SESSION['tId'],$perso->id());
+		$d=date('d/m/Y', strtotime($tch->dateE()));
+	  	$x = array(
+	  		"id" 			=>$tch->id(),
+	  		"dateE" 		=>$d,
+	  		"dateEntree" 	=>$tch->dateEntree(),
+	  		"titre"			=>$tch->titre(),
+	  		"texte" 		=>$tch->texte()
+	  	);
+		echo json_encode($x);
+	}
+
+	//requier POST:
+	//id,DateE,titre,texte
+	function editSendTask($tmanager,$idc)
+	{
+		$dt = DateTime::createFromFormat('d/m/Y', $_POST['date']);
+		$d = $dt->format('Y-m-d');
+
+
+		$tache= new Tache();
+		$tache->hydrate(['id' => $_POST['id'],'dateE' => $d,'titre' => $_POST['titre'],'texte' =>$_POST['texte'] ]);
+    	$tmanager->update($tache,$idc);
+    	header('Location: acc.php');
+    }
+
+
+
+
+	//requier POST:
+	//id,DateE,titre,texte
+	function creeSendTask($tmanager,$idc)
+	{
+		$dt = DateTime::createFromFormat('d/m/Y', $_POST['date']);
+		$d = $dt->format('Y-m-d');
+		
+		$tache= new Tache();
+		$tache->hydrate(['clientId' => $idc,'dateE' => $d,'titre' => $_POST['titre'],'texte' =>$_POST['texte'] ]);
+    	$tmanager->add($tache);
+    	header('Location: acc.php');
+	}
+
+
+	//requier POST:
+	//id,DateE,titre,texte
+	function delTask($tmanager,$idc)
+	{
+		$tmanager->delete(intval ($_POST['id']),$idc);
+    	echo 'supression effectuer';
+	}
+
+
+	function reverseDate($d){
+
+	}
 
 ?>

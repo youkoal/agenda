@@ -26,6 +26,11 @@ class RenderService
 		include 'html/listTaches.php';
 	}
 
+	public function renderEditTache()
+	{
+		include 'html/tacheEditForm.html';
+	}
+
 	public function renderAcc()
 	{
 		include 'html/connected.html';

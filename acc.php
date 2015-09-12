@@ -37,25 +37,73 @@ elseif (isset($_POST['utiliser']) && isset($_POST['nom'])) // Si on a voulu util
 {//ne pas oublier d'ajouter la verif de password...
   connectUser($RService,$manager,$_POST['nom'],$tmanager);
 }
+elseif (isset($_POST['annuler'])) // Si on a voulu utiliser un Client.
+{//ne pas oublier d'ajouter la verif de password...
+  header('Location: acc.php');
+}
 
 
 
 //utilisateur connecté
-if (isset($perso) && isset($_POST['editer']))
-{
-  editRender($RService);
-}
-elseif(isset($perso) && isset($_POST['editerOK']))
-{//mise à jour du perso
-  editSending($perso,$manager);
-}
-elseif (isset($perso) && isset($_POST['creeTache'])) // Si on utilise un personnage (nouveau ou pas).
-{
-  tacheForm($RService);
-}
-elseif (isset($perso) && !(isset($_GET['get_param']))) // Si on utilise un personnage (nouveau ou pas).
-{
-  userRender($RService,$manager,$perso);
+if (isset($perso)){
+  if(isset($_GET['get_param'])){
+    if($_GET['get_param']=='users'){
+      makeResponseUsers($perso, $manager);
+    }
+    elseif($_GET['get_param']=='editPerso'){
+      makeResponseEdit($perso);
+    }
+    elseif($_GET['get_param']=='minTaches'){
+      makeResponseMinTaches($perso,$tmanager);
+    }
+    elseif($_GET['get_param']=='bigTaches'){
+      makeResponseBigTaches($perso,$tmanager,$_GET['idTask']);
+    }
+    elseif($_GET['get_param']=='tache'){
+      makeResponseEditTaches($perso,$tmanager);
+    }
+  }
+  elseif(isset($_GET['ed']) && !isset($_POST['editerTacheOK']) && !isset($_POST['annuler']) )
+  {
+    $RService->renderEditTache();
+  }
+  else
+  {
+    if (isset($_POST['editer']))
+    {
+      editRender($RService);
+    }
+    elseif(isset($_POST['editerOK']))
+    {//mise à jour du perso
+      editSending($perso,$manager);
+    }
+    elseif (isset($_POST['creeTache'])) // Si on utilise un personnage (nouveau ou pas).
+    {
+      tacheForm($RService);
+    }
+    elseif (isset($_POST['creeTacheOK'])) // Si on utilise un personnage (nouveau ou pas).
+    {
+      creeSendTask($tmanager,$perso->id());
+    }
+    elseif(isset($_POST['editerTache']))
+    {
+      setEditTask();
+    }
+    elseif(isset($_POST['editerTacheOK']))
+    {//mise à jour du perso
+      editSendTask($tmanager,$perso->id());
+    }
+    elseif(isset($_POST['delTask']))
+    {//mise à jour du perso
+      delTask($tmanager,$perso->id());
+    }
+    else// Si on utilise un personnage (nouveau ou pas).
+    {
+      userRender($RService,$manager,$perso);
+    }
+  }
+
+
 }
 
 
@@ -67,18 +115,5 @@ if(!(isset($_SESSION['perso'])))
   $RService->renderForn(); 
 }
 
-if(isset($_GET['get_param'])){
-  if($_GET['get_param']=='users'){
-    makeResponseUsers($perso, $manager);
-  }
-  elseif($_GET['get_param']=='editPerso'){
-    makeResponseEdit($perso);
-  }
-  elseif($_GET['get_param']=='minTaches'){
-    makeResponseMinTaches($perso,$tmanager);
-  }
-  elseif($_GET['get_param']=='bigTaches'){
-    makeResponseBigTaches($perso,$tmanager,$_GET['idTask']);
-  }
-}
+
 ?>

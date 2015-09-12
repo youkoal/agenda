@@ -13,7 +13,7 @@
 			<legend>
 				<a href="?deconnexion=1"><button id='deco'>Déconnexion</button></a>
 			</legend>
-<form action="" method="post" id="tForm">
+<form action="" method="post">
 
 	<label class='lb1'>date : </label>
 		<input id='date' class='fld' type="text" name="date"  />
@@ -22,12 +22,14 @@
 		<input id='titre' class='fld' type="text" name="titre" />
 		<br>
 	<label class='lb1'>texte   : </label>
-		<textarea id='texte' class='fld' type="text" name="texte" form="tForm"></textarea>
+		<input id='texte' class='fld' type="text" name="texte" />
 		<br><br>
 
+		<input id='tId' class='no' name="id" />
+
 	<p>
-	<input id='valider' type="submit" value="cree la tache" name="creeTacheOK" />
-	<input id='annuler' type="submit" value="annuler" name="annuler" />
+	<input id='valider' type="submit" value="cree la tache" name="editerTacheOK" />
+	<input id='annuler' type="submit" value="annuler" name="ok" />
 	</p>
 </form>
 
@@ -37,5 +39,5 @@
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="JS/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-	<script src="JS/creeTache.js"></script>
+	<script src="JS/editTache.js"></script>
 </html>

@@ -24,27 +24,22 @@ class TacheManager
 
 	    // Assignation des valeurs pour le nom du Client.
 	    $q->bindValue(':id', 		 $tache->clientId(), PDO::PARAM_INT);
-	    $q->bindValue(':dateEntree', date('Y-m-d'), 	 PDO::PARAM_STR);//date du jour
+	    $q->bindValue(':entree', 	 date('Y-m-d'), 	 PDO::PARAM_STR);//date du jour
 	    $q->bindValue(':dateE', 	 $tache->dateE(), 	 PDO::PARAM_STR);
 	    $q->bindValue(':titre', 	 $tache->titre(), 	 PDO::PARAM_STR);
 	    $q->bindValue(':texte', 	 $tache->texte(), 	 PDO::PARAM_STR);
 
 	    // Exécution de la requête.
 	      $q->execute();
-	    
-	    // Hydratation de la tache passé en paramètre avec assignation de son identifiant + date de l'entrée
-	      $tache->hydrate([
-	        'id' => $this->_db->lastInsertId(),
-	        'dateEntree' => date('Y-m-d'),
-	      ]);
 	}
 
 
-	public function delete($id)
+	public function delete($id,$idc)
 	{
 	    // Exécute une requête de type DELETE.
-	    $q = $this->_db->prepare('DELETE * FROM taches WHERE id= :id');
-	    $q->bindValue(':id', $id, PDO::PARAM_INT);
+	    $q = $this->_db->prepare('DELETE FROM taches WHERE id = :id AND clientId = :idc');
+	    $q->bindValue(':id' , $id , PDO::PARAM_INT);
+	    $q->bindValue(':idc', $idc, PDO::PARAM_INT);
 	    $q->execute();
 	}
 
@@ -120,13 +115,15 @@ class TacheManager
   	}
 
   	
-  	public function update(Tache $tache)
+  	public function update(Tache $tache, $idc)
   	{
 	    // Prépare une requête de type UPDATE.
-	    $q = $this->_db->prepare('UPDATE taches SET dateEntree = :dateEntree, dateE = :dateE, titre = :titre, texte = :texte WHERE id = :id');
+	    $q = $this->_db->prepare('UPDATE taches SET dateEntree = :dateEntree, dateE = :dateE, titre = :titre, texte = :texte WHERE id = :id AND clientId = :idc');
 	    // Assignation des valeurs à la requête.
-	    $q->bindValue(':id', 		 $tache->id(), 	  PDO::PARAM_INT);
-	    $q->bindValue(':dateEntree', date('Y-m-d'),   PDO::PARAM_STR);
+	    $q->bindValue(':id' , 		 $tache->id(), 	  PDO::PARAM_INT);
+	    $q->bindValue(':idc', 		 $idc, 	  		  PDO::PARAM_INT);
+
+	    $q->bindValue(':dateEntree', date('Y-m-d')  , PDO::PARAM_STR);
 	    $q->bindValue(':dateE', 	 $tache->dateE(), PDO::PARAM_STR);
 	    $q->bindValue(':titre', 	 $tache->titre(), PDO::PARAM_STR);
 	    $q->bindValue(':texte', 	 $tache->texte(), PDO::PARAM_STR);

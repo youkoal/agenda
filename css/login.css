@@ -4,7 +4,7 @@ body {
 	/*http://yeknan.free.fr/dc2/public/blenderfx/worm.jpg*/
 	background-color:gray;
 	background-image: url(../img/worm.jpg);
-	-webkit-background-size: cover; /* pour Chrome et Safari */
+	-webkit-background-size: cover ; /* pour Chrome et Safari */
 	-moz-background-size: cover; /* pour Firefox */
 	-o-background-size: cover; /* pour Opera */
 	background-size: cover; /* version standardisée */
