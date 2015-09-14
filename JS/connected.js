@@ -121,7 +121,7 @@ function buildMinFT(dF,dT){
     console.log('from '+iF);
     console.log('to '+iT);
 
-    for(var i=iF;i<iT+1;i++)
+    for(var i=iF;i<=iT;i++)
     {
         if (!(d[i])){break;}
         var theDiv      = document.getElementById("minTaches");
