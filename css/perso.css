@@ -139,12 +139,13 @@ legend{
 #optForm{
 	padding-top: 5px;
 	float:left;
-	width:170px;
+	width:220px;
 	height:60px;
 	background-color: lightgray;
 	border-radius: 10px;
 
 }
+
 
 #actionButtons{
 	display: inline-block;

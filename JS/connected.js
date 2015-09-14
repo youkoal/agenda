@@ -7,6 +7,8 @@ $(document).ready(function(){
     });
 
 var dataTab;
+var dataTabMin;
+var dataDates=[];
 function initData(){
 	$.ajax({ 
         type: 'GET', 
@@ -47,6 +49,7 @@ function getMin(){
         dataType: 'json',
         success: function(data) { 
             console.log(data);
+            dataTabMin=data;
             buildMin(data);
         }
     });
@@ -64,6 +67,8 @@ function buildMin(d){
         tache.appendChild(document.createTextNode(dateSwap(d[i]['dateE'])));
         tache.appendChild(document.createElement("br"));
         tache.appendChild(document.createTextNode(d[i]['titre']));
+
+        dataDates.push(d[i]['dateE']);//recup de la date et de son indice pour plus tard
         
         tache.onclick = function(){
             getBig(this.value);
@@ -71,6 +76,70 @@ function buildMin(d){
         theDiv.appendChild(tache);
 
     }
+}
+
+function destroyMin(){
+    var myNode = document.getElementById("minTaches");
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.firstChild);
+}
+}
+function buildMinFT(dF,dT){
+    var f=0;
+    var t=0;
+    var iF=0;
+    var iT=dataDates.length;
+    var d=dataTabMin;
+
+    dF=FRtoUS(dF);//on compare en utilisant le format US des dates
+    dT=FRtoUS(dT);
+
+    if (!(dF)){dF=0};//si on a entré aucune date, on prend 0 <==> false
+    if (!(dT)){dT=0};
+
+    if (dF<dT && !(dT==0))
+        {f=dF;t=dT;}//2dates entrée ou juste la date de début
+    else      
+        {f=dT;f=dF;}
+
+    if ( f ) //si on à donné une date
+    {
+        for(var i=0;i<dataDates.length;i++)
+        {
+            if(dataDates[i]>=f){iF=i;i=dataDates.length+1;}
+        }
+    }
+
+    if ( t ) //si on à donné une date
+    {
+        for(var i=dataDates.length-1;i>(-1);i--)
+        {
+            if(dataDates[i]<= t){iT=i;i=(-2);}
+        }
+    }
+
+    console.log('from '+iF);
+    console.log('to '+iT);
+
+    for(var i=iF;i<iT+1;i++)
+    {
+        if (!(d[i])){break;}
+        var theDiv      = document.getElementById("minTaches");
+        var tache       = document.createElement("div");
+        tache.className = "mini";
+        tache.value     =d[i]['id'];
+
+        tache.appendChild(document.createTextNode(dateSwap(d[i]['dateE'])));
+        tache.appendChild(document.createElement("br"));
+        tache.appendChild(document.createTextNode(d[i]['titre']));
+        
+        tache.onclick = function(){
+            getBig(this.value);
+        };
+        theDiv.appendChild(tache);
+
+    }
+
 }
 
 function getBig(id){
@@ -101,6 +170,15 @@ function dateSwap(d){
     var d=d.substring(8,10);
 
     var comp= d+' '+mois[m-1]+' '+y;
+    return comp;
+}
+
+function FRtoUS(d){
+    var j=d.substring(0,2);
+    var m=d.substring(3,5);
+    var a=d.substring(6,10);
+
+    var comp= a+'-'+m+'-'+j;
     return comp;
 }
 
@@ -176,4 +254,11 @@ $('#editTask').click(function()
                 window.location.replace(url+"?ed");
             }
         });
+    });
+
+$('#gobutton').click(function() 
+    {
+        destroyMin();
+        buildMinFT($('#dtPick1').val(),$('#dtPick2').val());
+
     });
