@@ -1,16 +1,19 @@
 body{
 	background-color: gray;
 	width:800px;
+}
 
-	
-
+#page{
+	width:800px;
+	margin:auto;
+	background-color: black;
 }
 
 #persos{	
 	width:800px;
 	margin:auto;
-
 }
+
 legend{
 	background-color: lightgray;
 	border-radius: 2px;
@@ -36,7 +39,7 @@ legend{
     float: left;
     clear: left;
     text-align: right;
-    width:60px;
+    width:70px;
     margin:5px;
 
 }
@@ -69,7 +72,7 @@ legend{
 #optionsTaches{
 	display: inline-block;
 
-	width:775px;
+	width:762px;
 	height:80px;
 	padding:10px;
 	border-radius: 15px;
@@ -132,14 +135,14 @@ legend{
     float: left;
     clear: left;
     text-align: right;
-    width:80px;
+    width:85px;
 }
 
 
 #optForm{
 	padding-top: 5px;
 	float:left;
-	width:220px;
+	width:240px;
 	height:60px;
 	background-color: lightgray;
 	border-radius: 10px;
