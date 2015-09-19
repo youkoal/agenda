@@ -8,7 +8,7 @@ function chargerClasse($classname)
 spl_autoload_register('chargerClasse');
 
 session_start(); // On appelle session_start() APRÈS avoir enregistré l'autoload.
-include 'php/utilService.php';
+include 'php/utilService.php';//fonctions utilitaires
 ?>
 
 
@@ -29,16 +29,16 @@ if (isset($_SESSION['perso']))
 
 
 //creation\utilisation d'un utilisateur
-if (isset($_POST['creer']) && isset($_POST['nom'])) // Si on a voulu créer un Client.
+if (isset($_POST['creer']) ) // Si on a voulu créer un Client.
 {
   creeNewClient($manager);
 }
-elseif (isset($_POST['utiliser']) && isset($_POST['nom'])) // Si on a voulu utiliser un Client.
+elseif (isset($_POST['utiliser'])) // Si on a voulu utiliser un Client.
 {//ne pas oublier d'ajouter la verif de password...
   connectUser($RService,$manager,$_POST['nom'],$tmanager);
 }
-elseif (isset($_POST['annuler'])) // Si on a voulu utiliser un Client.
-{//ne pas oublier d'ajouter la verif de password...
+elseif (isset($_POST['annuler'])) // Si on a voulu annulé une action.
+{
   header('Location: acc.php');
 }
 
@@ -46,7 +46,7 @@ elseif (isset($_POST['annuler'])) // Si on a voulu utiliser un Client.
 
 //utilisateur connecté
 if (isset($perso)){
-  if(isset($_GET['get_param'])){
+  if(isset($_GET['get_param'])){//demande d'infos pour remplissage des champs
     if($_GET['get_param']=='users'){
       makeResponseUsers($perso, $manager);
     }
@@ -63,6 +63,7 @@ if (isset($perso)){
       makeResponseEditTaches($perso,$tmanager);
     }
   }
+  //condition à optimisée
   elseif(isset($_GET['ed']) && !isset($_POST['editerTacheOK']) && !isset($_POST['annuler']) )
   {
     $RService->renderEditTache();

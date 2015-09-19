@@ -16,8 +16,8 @@ public function setDb(PDO $db)
   }
   
 
-
-    public function add(Client $perso)
+  //ajout d'un client dans la BDD
+  public function add(Client $perso)
   {
     // Préparation de la requête d'insertion.
     $q = $this->_db->prepare('INSERT INTO clients SET pseudo = :nom, pass = :pass, mail = :mail, tel1 = :tel1, tel2 = :tel2');
@@ -38,12 +38,14 @@ public function setDb(PDO $db)
       ]);
   }
   
+  //retourne le nombre de clients
   public function count()
   {
     // Exécute une requête COUNT() et retourne le nombre de résultats retourné.
     return $this->_db->query('SELECT COUNT(*) FROM clients')->fetchColumn();
   }
   
+  //suppression d'un client
   public function delete(Client $perso)
   {
     // Exécute une requête de type DELETE.
@@ -52,6 +54,7 @@ public function setDb(PDO $db)
     $q->execute();
   }
   
+  //
   public function exists($info)
   {
     if (is_int($info)) // On veut voir si tel Client ayant pour id $info existe.
@@ -67,6 +70,7 @@ public function setDb(PDO $db)
     return (bool) $q->fetchColumn();
   }
   
+  //reccupération des données d'un client par son pseudo ou son ID
   public function get($info)
   {
     // Si le paramètre est un entier, on veut récupérer le Client avec son identifiant.
@@ -89,6 +93,7 @@ public function setDb(PDO $db)
     }
   }
   
+  //réccupération de la liste des pseudos des clients existant
   public function getList($nom)
   {
     $persos = [];
@@ -106,6 +111,7 @@ public function setDb(PDO $db)
     return $persos;
   }
   
+  //mise à jour d'une modification d'un client
   public function update(Client $perso)
   {
     // Prépare une requête de type UPDATE.

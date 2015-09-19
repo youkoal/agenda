@@ -6,6 +6,32 @@
 	$tmanager = new TacheManager($db);
 	$RService = new RenderService();
 
+
+	//à bouger
+	function userRender($RService)
+	{
+		$RService->renderAcc();
+	}
+
+	//à bouger
+	function editRender($RService)
+	{
+  		$RService->renderModif();
+	}
+
+	//à bouger
+	function tacheForm($RService){
+		$RService->renderCreeTache();
+	}
+
+	//si le client veut édité un tache, il nous faut l'id de la tache à éditée.
+	//pour pouvoir par la suite chargé les données qui lui correspondent. 
+	function setEditTask()
+	{
+		$_SESSION['tId']=$_POST['id'];;
+		
+	}
+
 	//creation d'un nouvel utilisateur
 	function creeNewClient($manager)
 	{
@@ -31,8 +57,6 @@
 		{
 		    $perso = $manager->get($nom);
 		    $_SESSION['perso']=$perso;
-		    //userRender($RService,$manager,$perso);
-		    //Taches($RService,$perso,$tmanager);
 		    $RService->renderAcc();
 		}
 		else
@@ -41,21 +65,10 @@
 		}	
 	}
 
-	function userRender($RService)
-	{
-		$RService->renderAcc();
-	}
 
-	function editRender($RService)
-	{
-		//echo ('<div id="persos">');
-  		//affiche info de l'utilisateur courant
-  		//$RService->renderModif($perso); 
-  		//$RService->renderListU($manager->getList($perso->pseudo())); 
-  		//echo ('</div>');
-  		$RService->renderModif();
-	}
 
+	//édition de donnée d'un client. par sécuritée, on verifie aussis que celui qui 
+	//édite la donnée édite bien ses propres données.
 	function editSending($perso,$manager)
 	{
 		$perso->hydrate(['pseudo' => $_POST['nom'],'pass' => $_POST['pass'],'mail' =>$_POST['mail'],'tel1' => $_POST['tel1'],'tel2' => $_POST['tel2']]);
@@ -64,20 +77,12 @@
     	header('Location: acc.php');
 	}
 
+	//reccuperation de toutes les données de l'agenda du client connecté.
 	function Taches($RService,$perso,$tmanager)
 	{
 		$taches=$tmanager->getAll($perso->id());
 		$RService->renderTaches($taches);
 	}
-
-	function tacheForm($RService){
-		$RService->renderCreeTache();
-	}
-
-
-
-
-
 
 	//tout les utilisateurs + utilisateur courant
 	function makeResponseUsers($perso, $manager)
@@ -109,6 +114,8 @@
 
 	}
 
+	//lors de l'édition des données d'un perso, on reccuperes les données du client connecté.
+	//cela permetra de préremplire les champs
 	function makeResponseEdit($perso)
 	{
 		$p =[
@@ -120,7 +127,8 @@
 		echo json_encode($p);
 	}
 
-
+	//pour le premier apperçut des taches, il faut charger un minimum de donnée qui les résumes.
+	//on reccupère donc le titre et la date de toutes les taches entrées par le client connecté.
 	function makeResponseMinTaches($perso,$tmanager)
 	{
 		$p =$tmanager->getAll($perso->id());
@@ -138,7 +146,7 @@
 		echo json_encode($p2);
 	}
 
-
+	//on reccupere le contenus de la tache séléctionnée par le client.
 	function makeResponseBigTaches($perso,$tmanager,$tid)
 	{
 		$tch=$tmanager->get($tid,$perso->id());
@@ -153,14 +161,7 @@
 		echo json_encode($x);
 	}
 
-
-	function setEditTask()
-	{
-		$_SESSION['tId']=$_POST['id'];;
-		
-	}
-
-
+	//reccuperation des données de la tache à éditée pour préremplire les champs du formulaire.
 	function makeResponseEditTaches($perso,$tmanager)
 	{
 		$tch=$tmanager->get($_SESSION['tId'],$perso->id());
@@ -175,13 +176,11 @@
 		echo json_encode($x);
 	}
 
-	//requier POST:
-	//id,DateE,titre,texte
+	//mise à jour de la taches éditée par le client.
 	function editSendTask($tmanager,$idc)
 	{
 		$dt = DateTime::createFromFormat('d/m/Y', $_POST['date']);
 		$d = $dt->format('Y-m-d');
-
 
 		$tache= new Tache();
 		$tache->hydrate(['id' => $_POST['id'],'dateE' => $d,'titre' => $_POST['titre'],'texte' =>$_POST['texte'] ]);
@@ -189,11 +188,7 @@
     	header('Location: acc.php');
     }
 
-
-
-
-	//requier POST:
-	//id,DateE,titre,texte
+	//ajout à la BDD de la tâche créé par le client.
 	function creeSendTask($tmanager,$idc)
 	{
 		$dt = DateTime::createFromFormat('d/m/Y', $_POST['date']);
@@ -205,18 +200,11 @@
     	header('Location: acc.php');
 	}
 
-
-	//requier POST:
-	//id,DateE,titre,texte
+	//suppression de la tâche sélectionnée par le client
 	function delTask($tmanager,$idc)
 	{
 		$tmanager->delete(intval ($_POST['id']),$idc);
     	echo 'supression effectuer';
-	}
-
-
-	function reverseDate($d){
-
 	}
 
 ?>
