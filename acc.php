@@ -1,5 +1,6 @@
 <?php
 // On enregistre notre autoload.
+//test
 function chargerClasse($classname)
 {
   require 'php/'.$classname.'.php';
